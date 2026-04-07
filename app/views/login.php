@@ -1,43 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-    <script src="public/js/jquery-4.0.0.min.js"></script>
+    <link rel="stylesheet" href="public/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="public/js/auth.js"></script>
 </head>
+<body>
 
-<body class="container mt-5">
+    <main class="container">
+        <h2>Login</h2>
 
-    <h2>Login</h2>
+        <form id="formLogin">
+            <input type="text" name="username" id="username" placeholder="Usuario">
+            <input type="password" name="password" id="password" placeholder="Contraseña">
 
-    <form id="formLogin">
-        <input
-            class="form-control mb-2"
-            name="username"
-            id="username"
-            placeholder="Usuario">
-
-        <input
-            type="password"
-            class="form-control mb-2"
-            name="password"
-            id="password"
-            placeholder="Contraseña">
-
-        <button type="submit" class="btn btn-primary">
-            Ingresar
-        </button>
-        <a href="index.php?page=registro" class="btn btn-secondary">Registrarse</a>
-    </form>
-
-
+            <button type="submit">Ingresar</button>
+            <a href="index.php?page=registro" class="btn btn-secondary">Registrarse</a>
+        </form>
+    </main>
 
 </body>
-
 </html>

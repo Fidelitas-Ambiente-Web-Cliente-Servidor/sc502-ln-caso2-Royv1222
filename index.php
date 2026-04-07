@@ -13,17 +13,15 @@ $page = $_GET['page'] ?? 'login';
 // ========== RUTAS GET OBTENER DATOS ==========
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    // Obtener listado de talleres
-    if ($_GET['option'] ?? "" == "talleres_json") {
+    if (($_GET['option'] ?? '') === 'talleres_json') {
         $taller = new TallerController();
         $taller->getTalleresJson();
         exit;
     }
 
-    // Obtener solicitudes pendientes
-    if ($_GET['option'] ?? "" == "solicitudes_json") {
+    if (($_GET['option'] ?? '') === 'solicitudes_json') {
         $admin = new AdminController();
-        //$admin->getSolicitudesJson();
+        $admin->listarPendientes();
         exit;
     }
 }
@@ -31,65 +29,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // ========== RUTAS FORMULARIO POST ==========
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if ($_POST['option'] == "login") {
+    if (($_POST['option'] ?? '') === 'login') {
         $auth = new UserController();
         $auth->login();
         exit;
     }
 
-    if ($_POST['option'] == "register") {
+    if (($_POST['option'] ?? '') === 'register') {
         $auth = new UserController();
         $auth->registro();
         exit;
     }
 
-    if ($_POST['option'] == "logout") {
+    if (($_POST['option'] ?? '') === 'logout') {
         $auth = new UserController();
         $auth->logout();
         exit;
     }
 
-    if ($_POST['option'] == "solicitar") {
+    if (($_POST['option'] ?? '') === 'solicitar') {
         $taller = new TallerController();
         $taller->solicitar();
         exit;
     }
 
-    if ($_POST['option'] == "aprobar") {
+    if (($_POST['option'] ?? '') === 'aprobar') {
         $admin = new AdminController();
         $admin->aprobar();
         exit;
     }
 
-    if ($_POST['option'] == "rechazar") {
+    if (($_POST['option'] ?? '') === 'rechazar') {
         $admin = new AdminController();
         $admin->rechazar();
         exit;
     }
+    
+    if (($_POST['option'] ?? '') === 'guardar_taller') {
+    $taller = new TallerController();
+    $taller->guardar();
+    exit;
+}
 }
 
 // ========== RUTAS DE VISTAS ==========
 switch ($page) {
 
-    case "talleres":
+    case 'talleres':
         $taller = new TallerController();
         $taller->index();
         break;
 
-    case "admin":
+    case 'admin':
         $admin = new AdminController();
         $admin->solicitudes();
         break;
 
-    case "logout":
-        $auth = new UserController();
-        $auth->logout();
-        break;
-    case "registro":
+    case 'registro':
         $auth = new UserController();
         $auth->showRegistro();
         break;
-    case "login":
+
+    case 'logout':
+        $auth = new UserController();
+        $auth->logout();
+        break;
+
+    case 'login':
     default:
         $auth = new UserController();
         $auth->showLogin();
